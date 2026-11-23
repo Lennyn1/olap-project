@@ -1,0 +1,15 @@
+# Локальные базы данных
+*.duckdb
+*.duckdb.wal
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Секреты и настройки
+.env
+.env.*
+
+# Данные Docker
+docker-data/
