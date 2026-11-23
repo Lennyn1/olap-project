@@ -13,3 +13,4 @@ __pycache__/
 
 # Р”Р°РЅРЅС‹Рµ Docker
 docker-data/
+/Стенд/metabase/plugins/
