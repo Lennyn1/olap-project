@@ -1,12 +1,15 @@
--- Z10 / Native SQL / line chart «Выручка по дням и магазинам»
--- Source is Z09 aggregate; join date for identical date-filter mapping.
--- date_filter: Field Filter -> retail_pz7.dim_date.full_date, alias d.
-SELECT a.sale_date AS sale_date,
-       s.store_name AS store_name,
-       SUM(a.amount_sum) AS total_revenue
+-- З10. Выручка по дням и магазинам (Native SQL, Metabase)
+-- Источник: агрегат З09. Metabase variable: period -> Field Filter
+-- Field Filter column: agg_daily_store_sales.sale_date
+-- Table and field alias (if needed): a.sale_date
+SELECT
+    a.sale_date AS sale_date,
+    s.store_name AS store_name,
+    SUM(a.amount_sum) AS total_revenue
 FROM retail_pz7.agg_daily_store_sales AS a
-INNER JOIN retail_pz7.dim_store AS s ON a.store_id = s.store_id
-INNER JOIN retail_pz7.dim_date AS d ON a.sale_date = d.full_date
-[[WHERE {{date_filter}}]]
+JOIN retail_pz7.dim_store AS s
+    ON a.store_id = s.store_id
+WHERE 1 = 1
+[[AND {{period}}]]
 GROUP BY a.sale_date, s.store_name
-ORDER BY sale_date, store_name
+ORDER BY a.sale_date, s.store_name;
